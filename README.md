@@ -82,7 +82,7 @@ mkvextract
 
 `chmod +x mkv-extract-subtitles`  
 `./mkv-extract-subtitles "My File.mkv"`  
-This will create a new file for each subtitle in the current directory.
+This will create a new file for each subtitle of the mkv in the current directory.
 
-For batch processing all .mkv files in the current directoy copy mkv-extract-subtitles to a directory in your PATH and execute:  
-`find -iname "*.mkv" -exec mkv-extract-subtitles '{}'\;`
+For batch processing all .mkv files in a directoy:  
+`find [path to directory] -iname "*.mkv" -exec [path to mkv-extract-subtitles] '{}' \;`
