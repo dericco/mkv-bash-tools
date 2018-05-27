@@ -14,8 +14,8 @@
 #
 # This creates a new file for each subtitle in the specified file.
 #
-# For batch processing all .mkv files in a directoy:
-# find [path] -iname "*.mkv" -exec [path]mkv-extract-subtitles '{}' \;
+# For batch processing all .mkv files in the current directoy:
+# find . -iname "*.mkv" -exec [path]mkv-extract-subtitles '{}' \;
 
 
 if [[ "$1" == "" ]] || [[ "$1" == "--help" ]] || [[ "$1" == "-h" ]]; then
@@ -39,7 +39,7 @@ file_name=$1
 IFS='
 '
 
-tracks=$(LANG=en_US.utf8 LANGUAGE=en_US.utf8 '/Applications/Foto + Video/MKVToolNix-23.0.0.app/Contents/MacOS/mkvmerge' --identify-verbose "$file_name" | tail -n +2)
+tracks=$(LANG=en_US.utf8 LANGUAGE=en_US.utf8 mkvmerge --identify-verbose "$file_name" | tail -n +2)
 
 for track in $tracks; do
 	track_id=""
@@ -87,5 +87,5 @@ for track in $tracks; do
 		name="$name, $track_name"
 	fi
 
-	'/Applications/Foto + Video/MKVToolNix-23.0.0.app/Contents/MacOS/mkvextract' tracks "$file_name" "$track_id:${file_name%.*} [$name].$ext"
+	mkvextract tracks "$file_name" "$track_id:${file_name%.*} [$name].$ext"
 done
